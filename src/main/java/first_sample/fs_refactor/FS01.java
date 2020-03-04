@@ -47,21 +47,21 @@ public class FS01 {
         return result.toString();
     }
 
-    private int amountFor(Performance performance, Play play) {
+    private int amountFor(Performance aPerformance, Play play) {
         int result;
         switch (play.getType()) {
             case "tragedy":
                 result = 40000;
-                if (performance.getAudienceNum() > 30) {
-                    result += 1000 * (performance.getAudienceNum() - 30);
+                if (aPerformance.getAudienceNum() > 30) {
+                    result += 1000 * (aPerformance.getAudienceNum() - 30);
                 }
                 break;
             case "comedy":
                 result = 30000;
-                if (performance.getAudienceNum() > 20) {
-                    result += 10000 + 500 * (performance.getAudienceNum() - 20);
+                if (aPerformance.getAudienceNum() > 20) {
+                    result += 10000 + 500 * (aPerformance.getAudienceNum() - 20);
                 }
-                result += 300 * performance.getAudienceNum();
+                result += 300 * aPerformance.getAudienceNum();
                 break;
             default:
                 throw new RuntimeException("unknown type : " + play.getType());
