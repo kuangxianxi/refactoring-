@@ -6,6 +6,7 @@ import first_sample.common.Play;
 import first_sample.fs_refactor.FS;
 import first_sample.fs_refactor.FS01;
 import first_sample.fs_refactor.FS02;
+import first_sample.fs_refactor.FS03;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -32,5 +33,7 @@ public class TestSample {
         System.out.println(new FS01(invoice, plays).statement());
         System.out.println("------------------------------------------");
         System.out.println(new FS02(invoice, plays).statement());
+        System.out.println("------------------------------------------");
+        System.out.println(new FS03(invoice, plays).statement());
     }
 }
