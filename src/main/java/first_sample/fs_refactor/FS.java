@@ -3,6 +3,7 @@ package first_sample.fs_refactor;
 import first_sample.common.Invoice;
 import first_sample.common.Performance;
 import first_sample.common.Play;
+import lombok.AllArgsConstructor;
 
 import java.util.Map;
 
@@ -11,8 +12,12 @@ import java.util.Map;
  *
  * @author KuangXianXi
  */
+@AllArgsConstructor
 public class FS {
-    public String statement(Invoice invoice, Map<String, Play> plays) {
+    private Invoice invoice;
+    private Map<String, Play> plays;
+
+    public String statement() {
         int totalAmount = 0;
         double volumeCredits = 0;
 

@@ -13,7 +13,7 @@ import java.util.Map;
  * @author KuangXianXi
  */
 @AllArgsConstructor
-public class FS01 {
+public class FS02 {
     private Invoice invoice;
     private Map<String, Play> plays;
 
@@ -24,27 +24,22 @@ public class FS01 {
         StringBuilder result = new StringBuilder("Statement for " + invoice.getCustomer() + "\n");
 
         for (Performance performance : invoice.getPerformances()) {
-            Play play = plays.get(performance.getPlayId());
-            int thisAmount = amountFor(performance, play);
-            //增加积分
-            volumeCredits += Math.max(performance.getAudienceNum() - 30, 0);
-            //每10个额外的戏剧节目观众增加积分
-            if ("comedy".equals(play.getType())) {
-                volumeCredits += Math.floor(performance.getAudienceNum() / 5);
-            }
+//            Play play = playFor(performance);
+//            int thisAmount = amountFor(performance);
+            volumeCredits += volumeCreditsFor(performance);
 
             //打印结果
             result.append(" ");
-            result.append(play.getName());
+            result.append(playFor(performance).getName());
             result.append(": $");
-            result.append(thisAmount / 100);
+            result.append(usd(amountFor(performance)));
             result.append("(");
             result.append(performance.getAudienceNum());
             result.append(" seats)\n");
-            totalAmount += thisAmount;
+            totalAmount += amountFor(performance);
         }
         result.append("Amount owed is $");
-        result.append(totalAmount / 100);
+        result.append(usd(totalAmount));
         result.append("\n");
         result.append("You earned ");
         result.append(volumeCredits);
@@ -52,9 +47,24 @@ public class FS01 {
         return result.toString();
     }
 
-    private int amountFor(Performance aPerformance, Play play) {
+    private double volumeCreditsFor(Performance performance) {
+        double result = 0;
+        //增加积分
+        result += Math.max(performance.getAudienceNum() - 30, 0);
+        //每10个额外的戏剧节目观众增加积分
+        if ("comedy".equals(playFor(performance).getType())) {
+            result += Math.floor(performance.getAudienceNum() / 5);
+        }
+        return result;
+    }
+
+    private Play playFor(Performance performance) {
+        return plays.get(performance.getPlayId());
+    }
+
+    private int amountFor(Performance aPerformance) {
         int result;
-        switch (play.getType()) {
+        switch (playFor(aPerformance).getType()) {
             case "tragedy":
                 result = 40000;
                 if (aPerformance.getAudienceNum() > 30) {
@@ -69,8 +79,12 @@ public class FS01 {
                 result += 300 * aPerformance.getAudienceNum();
                 break;
             default:
-                throw new RuntimeException("unknown type : " + play.getType());
+                throw new RuntimeException("unknown type : " + playFor(aPerformance).getType());
         }
         return result;
+    }
+
+    private int usd(int aNumber) {
+        return aNumber / 100;
     }
 }
