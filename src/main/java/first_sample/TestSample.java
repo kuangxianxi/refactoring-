@@ -4,6 +4,7 @@ import first_sample.common.Invoice;
 import first_sample.common.Performance;
 import first_sample.common.Play;
 import first_sample.fs_refactor.FS;
+import first_sample.fs_refactor.FS01;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,5 +27,7 @@ public class TestSample {
         plays.put("othello", new Play("Othello", "tragedy"));
 
         System.out.println(new FS().statement(invoice, plays));
+        System.out.println("------------------------------------------");
+        System.out.println(new FS01().statement(invoice, plays));
     }
 }
