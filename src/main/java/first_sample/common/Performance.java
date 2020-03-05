@@ -15,4 +15,9 @@ import lombok.NoArgsConstructor;
 public class Performance {
     private String playId;
     private int audienceNum;
+
+    //第四次重构对其的修改
+    private Play play;
+    private int amount;
+    private double volumeCredits;
 }
