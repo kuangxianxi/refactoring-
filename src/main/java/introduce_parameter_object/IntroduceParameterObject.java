@@ -11,6 +11,6 @@ public class IntroduceParameterObject {
                 .stream()
                 .filter(reading -> reading.getTemp() > max || reading.getTemp() < min)
                 .map(Reading::toString)
-                .close();
+                .forEach(System.out::println);
     }
 }

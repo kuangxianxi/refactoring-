@@ -15,6 +15,6 @@ public class IntroduceParameterObjectAfterRefactored {
                 .stream()
                 .filter(reading -> numberRange.filterUnQualified(reading.getTemp()))
                 .map(Reading::toString)
-                .close();
+                .forEach(System.out::println);
     }
 }
